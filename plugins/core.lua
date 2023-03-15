@@ -37,11 +37,12 @@ return {
     init = function() vim.g.mkdp_filetypes = { "markdown" } end,
     ft = { "markdown" }
   },
-  {
-    "rebelot/heirline.nvim",
-    event = "BufEnter",
-    opts = require('user.plugins.add-on.heirline'),
-  },
+  -- The below heirline does not work, using Astronvim's recommended recipe
+  -- {
+  --   "rebelot/heirline.nvim",
+  --   event = "BufEnter",
+  --   opts = require "user.plugins.add-on.heirline"(plugin, opts),
+  -- },
   -- You can disable default plugins as follows:
   -- { "max397574/better-escape.nvim", enabled = false },
   --
