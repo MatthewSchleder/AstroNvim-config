@@ -20,6 +20,28 @@ return {
       return opts
     end,
   },
+  {
+    "kkoomen/vim-doge",
+    build = ":call doge#install()",
+    init = require('user.plugins.add-on.doge'),
+  },
+  {
+    "folke/tokyonight.nvim",
+    config = function() 
+      require("tokyonight").setup()
+    end,
+  },
+  {
+    "iamcco/markdown-preview.nvim",
+    build = "cd app && npm install",
+    init = function() vim.g.mkdp_filetypes = { "markdown" } end,
+    ft = { "markdown" }
+  },
+  {
+    "rebelot/heirline.nvim",
+    event = "BufEnter",
+    opts = require('user.plugins.add-on.heirline'),
+  },
   -- You can disable default plugins as follows:
   -- { "max397574/better-escape.nvim", enabled = false },
   --

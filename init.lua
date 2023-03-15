@@ -1,4 +1,73 @@
 return {
+  {
+    "goolord/alpha-nvim",
+    opts = function(_, opts)
+      -- customize the dashboard header
+      opts.section.header.val = {
+        "██   ██ ██         ██    ██   ██ ██    ██",
+        "███████ ███████    ██    ██████  ██    ██",
+        "██   ██      ██    ██    ██   ██ ██    ██",
+        "██   ██ ███████    ██    ██   ██  ██████",
+        " ",
+        "    ███    ██ ██    ██ ██ ███    ███",
+        "    ████   ██ ██    ██ ██ ████  ████",
+        "    ██ ██  ██ ██    ██ ██ ██ ████ ██",
+        "    ██  ██ ██  ██  ██  ██ ██  ██  ██",
+        "    ██   ████   ████   ██ ██      ██",
+      }
+      return opts
+    end,
+  },
+  -- {
+  --   "goolord/alpha-nvim",
+  --   opts = function(_, opts)
+  --     -- require("alpha.term")
+  --     opts.section.header.val = {
+  --       "what's up ",
+  --       " fam "
+  --     }
+  --     -- opts.section.buttons.val = {
+  --     --   dashboard.button("f", " " .. " Find file", ":Telescope find_files <CR>"),
+  --     --   dashboard.button("n", " " .. " New file", ":ene <BAR> startinsert <CR>"),
+  --     --   dashboard.button("r", " " .. " Recent files", ":Telescope oldfiles <CR>"),
+  --     --   dashboard.button("g", " " .. " Find text", ":Telescope live_grep <CR>"),
+  --     --   dashboard.button("c", " " .. " Config", ":e $MYVIMRC <CR>"),
+  --     --   dashboard.button("s", "勒" .. " Restore Session", [[:lua require("persistence").load() <cr>]]),
+  --     --   dashboard.button("l", "鈴" .. " Lazy", ":Lazy<CR>"),
+  --     --   dashboard.button("q", " " .. " Quit", ":qa<CR>"),
+  --     -- }
+  --     -- for _, button in ipairs(opts.section.buttons.val) do
+  --     --   button.opts.hl = "AlphaButtons"
+  --     --   button.opts.hl_shortcut = "AlphaShortcut"
+  --     -- end
+  --     -- opts.section.footer.opts.hl = "Type"
+  --     -- opts.section.header.opts.hl = "AlphaShortcut"
+  --     -- opts.section.buttons.opts.hl = "AlphaButtons"
+  --     --
+  --     -- local width = 46
+  --     -- local height = 25 -- two pixels per vertical space
+  --     -- -- dashboard.section.terminal.command = "cat | " .. os.getenv("HOME") .. "/.dotfiles/art/thisisfine.sh"
+  --     -- opts.section.terminal.width = width
+  --     -- opts.section.terminal.height = height
+  --     -- opts.section.terminal.opts.redraw = true
+  --     --
+  --     -- opts.section.header.val = "  𝕟 𝕖 𝕠 𝕧 𝕚 𝕞  "
+  --     --
+  --     -- opts.config.layout = {
+  --     --   { type = "padding", val = 1 },
+  --     --   opts.section.terminal,
+  --     --   { type = "padding", val = height + 5 },
+  --     --   opts.section.header,
+  --     --   { type = "padding", val = 2 },
+  --     --   opts.section.buttons,
+  --     --   { type = "padding", val = 1 },
+  --     --   opts.section.footer,
+  --     -- }
+  --     --
+  --     -- return opts
+  --     -- -- customize the dashboard header
+  --   end,
+  -- },
   -- Configure AstroNvim updates
   updater = {
     remote = "origin", -- remote to use
