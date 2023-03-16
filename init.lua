@@ -1,100 +1,5 @@
 return {
-  {
-    "goolord/alpha-nvim",
-    opts = function(_, opts)
-      -- customize the dashboard header
-      opts.section.header.val = {
-        "██   ██ ██         ██    ██   ██ ██    ██",
-        "███████ ███████    ██    ██████  ██    ██",
-        "██   ██      ██    ██    ██   ██ ██    ██",
-        "██   ██ ███████    ██    ██   ██  ██████",
-        " ",
-        "    ███    ██ ██    ██ ██ ███    ███",
-        "    ████   ██ ██    ██ ██ ████  ████",
-        "    ██ ██  ██ ██    ██ ██ ██ ████ ██",
-        "    ██  ██ ██  ██  ██  ██ ██  ██  ██",
-        "    ██   ████   ████   ██ ██      ██",
-      }
-      return opts
-    end,
-  },
-  plugins = {
-    {
-      "rebelot/heirline.nvim",
-      opts = function(_, opts)
-        local status = require("astronvim.utils.status")
-        opts.statusline = { -- statusline
-          hl = { fg = "fg", bg = "bg" },
-          status.component.mode { mode_text = { padding = { left = 1, right = 1 } } }, -- add the mode text
-          status.component.git_branch(),
-          status.component.file_info { filetype = {}, filename = false, file_modified = false },
-          status.component.git_diff(),
-          status.component.diagnostics(),
-          status.component.fill(),
-          status.component.cmd_info(),
-          status.component.fill(),
-          status.component.lsp(),
-          status.component.treesitter(),
-          status.component.nav(),
-          -- remove the 2nd mode indicator on the right
-        }
-
-        -- return the final configuration table
-        return opts
-      end,
-    },
-  },
-  -- {
-  --   "goolord/alpha-nvim",
-  --   opts = function(_, opts)
-  --     -- require("alpha.term")
-  --     opts.section.header.val = {
-  --       "what's up ",
-  --       " fam "
-  --     }
-  --     -- opts.section.buttons.val = {
-  --     --   dashboard.button("f", " " .. " Find file", ":Telescope find_files <CR>"),
-  --     --   dashboard.button("n", " " .. " New file", ":ene <BAR> startinsert <CR>"),
-  --     --   dashboard.button("r", " " .. " Recent files", ":Telescope oldfiles <CR>"),
-  --     --   dashboard.button("g", " " .. " Find text", ":Telescope live_grep <CR>"),
-  --     --   dashboard.button("c", " " .. " Config", ":e $MYVIMRC <CR>"),
-  --     --   dashboard.button("s", "勒" .. " Restore Session", [[:lua require("persistence").load() <cr>]]),
-  --     --   dashboard.button("l", "鈴" .. " Lazy", ":Lazy<CR>"),
-  --     --   dashboard.button("q", " " .. " Quit", ":qa<CR>"),
-  --     -- }
-  --     -- for _, button in ipairs(opts.section.buttons.val) do
-  --     --   button.opts.hl = "AlphaButtons"
-  --     --   button.opts.hl_shortcut = "AlphaShortcut"
-  --     -- end
-  --     -- opts.section.footer.opts.hl = "Type"
-  --     -- opts.section.header.opts.hl = "AlphaShortcut"
-  --     -- opts.section.buttons.opts.hl = "AlphaButtons"
-  --     --
-  --     -- local width = 46
-  --     -- local height = 25 -- two pixels per vertical space
-  --     -- -- dashboard.section.terminal.command = "cat | " .. os.getenv("HOME") .. "/.dotfiles/art/thisisfine.sh"
-  --     -- opts.section.terminal.width = width
-  --     -- opts.section.terminal.height = height
-  --     -- opts.section.terminal.opts.redraw = true
-  --     --
-  --     -- opts.section.header.val = "  𝕟 𝕖 𝕠 𝕧 𝕚 𝕞  "
-  --     --
-  --     -- opts.config.layout = {
-  --     --   { type = "padding", val = 1 },
-  --     --   opts.section.terminal,
-  --     --   { type = "padding", val = height + 5 },
-  --     --   opts.section.header,
-  --     --   { type = "padding", val = 2 },
-  --     --   opts.section.buttons,
-  --     --   { type = "padding", val = 1 },
-  --     --   opts.section.footer,
-  --     -- }
-  --     --
-  --     -- return opts
-  --     -- -- customize the dashboard header
-  --   end,
-  -- },
-  -- Configure AstroNvim updates
+  icons = { VimIcon = "", ScrollText = "" },
   updater = {
     remote = "origin", -- remote to use
     channel = "stable", -- "stable" or "nightly"
@@ -111,9 +16,6 @@ return {
       --   ["remote3"] = "github_user", -- GitHub user assume AstroNvim fork
     },
   },
-
-  -- Set colorscheme to use
-  colorscheme = "astrodark",
 
   -- Diagnostics configuration (for vim.diagnostics.config({...})) when diagnostics are on
   diagnostics = {
@@ -147,7 +49,6 @@ return {
       -- "pyright"
     },
   },
-
   -- Configure require("lazy").setup() options
   lazy = {
     defaults = { lazy = true },
@@ -158,22 +59,40 @@ return {
       },
     },
   },
-
-  -- This function is run last and is a good place to configuring
-  -- augroups/autocommands and custom filetypes also this just pure lua so
-  -- anything that doesn't fit in the normal config locations above can go here
+  heirline = {
+    separators = {
+      left = { "", " " }, -- separator for the left side of the statusline
+      right = { " ", "" } -- separator for the right side of the statusline
+    },
+    attributes = { mode = { bold = true } },
+    colors = function(hl)
+      -- use helper function to get highlight group properties
+      local utils = require("astronvim.utils")
+      local comment_fg = utils.get_hlgroup("Comment").fg
+      hl.git_branch_fg = comment_fg
+      hl.blank_bg = utils.get_hlgroup("Folded").fg
+      hl.file_info_bg = utils.get_hlgroup("Visual").bg
+      hl.nav_icon_bg = utils.get_hlgroup("String").fg
+      hl.nav_fg = hl.nav_icon_bg
+      hl.folder_icon_bg = utils.get_hlgroup("Error").fg
+      return hl
+    end,
+    icon_highlights = { file_icon = { statusline = false } }
+  },
   polish = function()
-    -- Set up custom filetypes
-    -- vim.filetype.add {
-    --   extension = {
-    --     foo = "fooscript",
-    --   },
-    --   filename = {
-    --     ["Foofile"] = "fooscript",
-    --   },
-    --   pattern = {
-    --     ["~/%.config/foo/.*"] = "fooscript",
-    --   },
-    -- }
-  end,
+    vim.cmd [[
+      set guicursor+=i:blinkon1
+    ]]
+    vim.schedule(function()
+      vim.cmd [[
+      call wilder#set_option('renderer', wilder#popupmenu_renderer(wilder#popupmenu_border_theme({
+      \ 'highlights': {
+      \   'border': 'Normal',
+      \ },
+      \ 'border': 'rounded',
+      \ })))
+      call wilder#setup({'modes': [':', '/', '?']})
+      ]]
+    end)
+  end
 }
