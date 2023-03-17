@@ -19,7 +19,22 @@ return {
     -- this is useful for naming menus
     ["<leader>b"] = { name = "Buffers" },
     -- quick save
-    -- ["<C-s>"] = { ":w!<cr>", desc = "Save File" },  -- change description but the same command
+    ["<C-s>"] = { ":w!<cr>", desc = "Save File" },  -- change description but the same command
+    ["<leader>v"] = { name = "Neovim" },
+    ["<leader>vc"] = {
+      "<cmd>:e ~/.config/nvim/lua/user/init.lua<cr>",
+      desc = "Open Neovim Config"
+    },
+    ["<leader>T"] = { name = "Telescope" },
+    ["<leader>Tc"] = {
+      "<cmd>Telescope colorscheme<cr>",
+      desc = "Set colorscheme"
+    },
+    ["<leader>Tp"] = {
+      "<cmd>Telescope projects<cr>",
+      desc = "Open project"
+    },
+    ["<leader>vu"] = { "<cmd>:Lazy update<cr>", desc = "Update plugins" },
   },
   t = {
     -- setting a mapping to false will disable it

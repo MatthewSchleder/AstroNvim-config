@@ -24,11 +24,6 @@ return {
         
         { type = "text", val = "Quick links", opts = { hl = "SpecialComment", position = "center" } },
         { type = "padding", val = 1 },
-        -- button("e", "  New file", "<cmd>ene<CR>"),
-        -- button("f", "  Find file", "<cmd>Telescope file_browser<CR>"),
-        -- button("w", "  Find text", "<cmd>Telescope live_grep<CR>"),
-        -- button("u", "  Update plugins", "<cmd>Lazy sync<CR>"),
-        -- button("q", "  Quit", "<cmd>qa<CR>"),
     
         button("LDR n", "  New File  "),
         button("LDR f f", "  Find File  "),
