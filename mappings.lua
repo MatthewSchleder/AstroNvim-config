@@ -1,4 +1,5 @@
 -- Mapping data with "desc" stored directly by vim.keymap.set().
+local utils = require "astronvim.utils"
 --
 -- Please use this mappings table to set keyboard mapping since this is the
 -- lower level configuration and more robust one. (which-key will
@@ -35,6 +36,8 @@ return {
       desc = "Open project"
     },
     ["<leader>vu"] = { "<cmd>:Lazy update<cr>", desc = "Update plugins" },
+    ["<leader>tj"] = { function() utils.toggle_term_cmd "jb" end, desc = "ToggleTerm jb" }
+    ["<leader>tk"] = { function() utils.toggle_term_cmd "k9s" end, desc = "ToggleTerm k9s" }
   },
   t = {
     -- setting a mapping to false will disable it
