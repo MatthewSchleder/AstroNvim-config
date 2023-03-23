@@ -36,7 +36,7 @@ return {
       desc = "Open project"
     },
     ["<leader>vu"] = { "<cmd>:Lazy update<cr>", desc = "Update plugins" },
-    ["<leader>tj"] = { function() utils.toggle_term_cmd "jb" end, desc = "ToggleTerm jb" }
+    ["<leader>tj"] = { function() utils.toggle_term_cmd "jb" end, desc = "ToggleTerm jb" },
     ["<leader>tk"] = { function() utils.toggle_term_cmd "k9s" end, desc = "ToggleTerm k9s" }
   },
   t = {
