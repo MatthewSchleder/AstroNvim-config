@@ -36,8 +36,13 @@ return {
       desc = "Open project"
     },
     ["<leader>vu"] = { "<cmd>:Lazy update<cr>", desc = "Update plugins" },
+    ["<leader>tv"] = { "<cmd>ToggleTerm size=140 direction=vertical<cr>", desc = "ToggleTerm vertical split" },
     ["<leader>tj"] = { function() utils.toggle_term_cmd "jb" end, desc = "ToggleTerm jb" },
-    ["<leader>tk"] = { function() utils.toggle_term_cmd "k9s" end, desc = "ToggleTerm k9s" }
+    ["<leader>tk"] = { function() utils.toggle_term_cmd "k9s" end, desc = "ToggleTerm k9s" },
+    -- ["gD"] = { "<cmd>Glance definitions<cr>", desc = "Glance Definitions" },
+    -- ["gR"] = { "<cmd>Glance references<cr>", desc = "Glance References" },
+    -- ["gY"] = { "<cmd>Glance type_definitions<cr>", desc = "Glance typedef" },
+    -- ["gM"] = { "<cmd>Glance implementations<cr>", desc = "Glance implementations" },
   },
   t = {
     -- setting a mapping to false will disable it

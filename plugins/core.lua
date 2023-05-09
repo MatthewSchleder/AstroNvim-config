@@ -123,7 +123,8 @@ return {
   },
   {
     "iamcco/markdown-preview.nvim",
-    build = "cd app && npm install",
+    lazy = false,
+    build = "cd app && yarn install",
     init = function() vim.g.mkdp_filetypes = { "markdown" } end,
     ft = { "markdown" }
   },
@@ -136,6 +137,17 @@ return {
         wilder.setup({ modes = { ':', '/', '?' } })
       end,
       lazy = false
+  },
+  {
+    "dnlhc/glance.nvim",
+    event = "BufReadPre",
+    config = true,
+    keys = {
+      { "gM", "<cmd>Glance implementations<cr>", desc = "Goto Implementations (Glance)" },
+      { "gY", "<cmd>Glance type_definitions<cr>", desc = "Goto Type Definition (Glance)" },
+      { "gR", "<cmd>Glance references<cr>", desc = "Goto References (Glance)" },
+      { "gD", "<cmd>Glance definitions<cr>", desc = "Goto Definitions (Glance)" }
+    },
   },
   {
     "nvim-neo-tree/neo-tree.nvim",
@@ -289,7 +301,8 @@ return {
           -- add a navigation component and just display the percentage of progress in the file
           status.component.nav {
             -- add some padding for the percentage provider
-            percentage = { padding = { right = 1 } },
+            provider = "%4l/%L:%-3c",
+            -- percentage = { padding = { right = 1 } },
             -- disable all other providers
             ruler = false,
             scrollbar = false,

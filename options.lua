@@ -7,6 +7,17 @@ return {
     spell = false, -- sets vim.opt.spell
     signcolumn = "auto", -- sets vim.opt.signcolumn to auto
     wrap = false, -- sets vim.opt.wrap
+    listchars = {
+      -- eol = "↲",
+      tab = "» ",
+      space = "·",
+      extends = "›",
+      precedes = "‹",
+      nbsp = "␣",
+    },
+    list = true,
+    colorcolumn = "80",
+    foldcolumn = "2",
   },
   g = {
     mapleader = " ", -- sets vim.g.mapleader
