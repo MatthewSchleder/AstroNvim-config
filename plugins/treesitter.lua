@@ -12,7 +12,7 @@ return {
       "gitcommit",
       "git_rebase",
       "graphql",
-      "help",
+      "vimdoc",
       "html",
       "http",
       "jq",
@@ -30,6 +30,7 @@ return {
       "toml",
       "typescript",
       "yaml",
+      "org",
     },
   },
 }

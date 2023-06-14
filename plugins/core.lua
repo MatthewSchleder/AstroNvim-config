@@ -102,10 +102,12 @@ return {
         button("LDR f f", "  Find File  "),
         button("LDR f o", "  Recents  "),
         button("LDR T p", "  Projects  "),
+        button("LDR o a", "  Org Agenda  "),
+        button("LDR o c", "󱞁  Org Capture  "),
         button("LDR v c", "  Edit Config  "),
         button("LDR S l", "  Last Session  "),
         button("LDR v u", "  Update  "),
-        button("LDR q", "  Quit Neovim")
+        button("LDR q", "  Quit Neovim  ")
       }
       return opts
     end,
@@ -127,6 +129,41 @@ return {
     build = "cd app && yarn install",
     init = function() vim.g.mkdp_filetypes = { "markdown" } end,
     ft = { "markdown" }
+  },
+  {
+    'nvim-orgmode/orgmode',
+    dev = false,
+    ft = 'org',
+    keys = {
+		  { "<leader>oa", "<Cmd>lua require('orgmode').action('agenda.prompt')<CR>", desc = "org agenda" },
+		  { "<leader>oc", "<Cmd>lua require('orgmode').action('capture.prompt')<CR>", desc = "org capture" },
+	  },
+	  opts = {
+      org_agenda_files = {'~/org/agenda/*.org'},
+      org_default_notes_file = '~/org/agenda/todos.org',
+		  org_indent_mode = "noindent",
+		  org_capture_templates = {
+			  t = { description = "Todo Item", template = "* TODO %?\n  %t\n  - "},
+			  p = { description = "Paste Todo Item", template = "* TODO %x%?\n  %t\n  - "},
+		  },
+		  mappings = {
+			  org = {
+				  org_toggle_checkbox = { "<C-space>", "<leader>o<space>", "gtd" },
+			  },
+		  },
+	  },
+    config = function(_, opts)
+		  require("orgmode").setup_ts_grammar()
+		  require("orgmode").setup(opts)
+		  if vim.bo.filetype == "org" then
+			  require("orgmode").reload(vim.fn.expand("<afile>:p"))
+		  end
+	  end,
+  },
+  { 
+    "akinsho/org-bullets.nvim",
+    config = true, 
+    ft = { "org" } 
   },
   {
      "gelguy/wilder.nvim",
