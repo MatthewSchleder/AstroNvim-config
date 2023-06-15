@@ -132,7 +132,7 @@ return {
   },
   {
     'nvim-orgmode/orgmode',
-    dev = false,
+    -- dev = false,
     ft = 'org',
     keys = {
 		  { "<leader>oa", "<Cmd>lua require('orgmode').action('agenda.prompt')<CR>", desc = "org agenda" },
@@ -141,7 +141,7 @@ return {
 	  opts = {
       org_agenda_files = {'~/org/agenda/*.org'},
       org_default_notes_file = '~/org/agenda/todos.org',
-      win_split_mode = 'auto',
+      -- win_split_mode = 'auto',
 		  org_indent_mode = "noindent",
 		  org_capture_templates = {
 			  t = { description = "Todo Item", template = "* TODO %?\n%t\n  - "},
@@ -210,10 +210,38 @@ return {
   },
   {
     "rebelot/heirline.nvim",
-    opts = function(_, opts)
+    opts = function(_, h_opts)
       local utils = require("astronvim.utils")
       local status = require("astronvim.utils.status")
-      opts.statusline = {
+      h_opts.opts = {
+        disable_winbar_cb = function(args)
+          return not require("astronvim.utils.buffer").is_valid(args.buf)
+            or status.condition.buffer_matches({
+              buftype = { "terminal", "prompt", "nofile", "help", "quickfix", "org" },
+              filetype = { "NvimTree", "neo%-tree", "dashboard", "Outline", "aerial", "org" },
+            }, args.buf)
+        end,
+      }
+      h_opts.winbar = { -- winbar
+        init = function(self) self.bufnr = vim.api.nvim_get_current_buf() end,
+        fallthrough = false,
+        { -- inactive winbar
+          condition = function() return not status.condition.is_active() end,
+          status.component.separated_path(),
+          status.component.file_info {
+            file_icon = { hl = status.hl.file_icon "winbar", padding = { left = 0 } },
+            file_modified = false,
+            file_read_only = false,
+            hl = status.hl.get_attributes("winbarnc", true),
+            surround = false,
+            update = "BufEnter",
+          },
+        },
+        { -- active winbar
+          status.component.breadcrumbs { hl = status.hl.get_attributes("winbar", true) },
+        },
+      }
+      h_opts.statusline = {
         -- statusline
         hl = { fg = "fg", bg = "bg" },
         status.component.mode {
@@ -352,7 +380,7 @@ return {
           }
         }
       }
-      return opts
+      return h_opts
     end
   },
 }
