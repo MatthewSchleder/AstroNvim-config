@@ -141,10 +141,11 @@ return {
 	  opts = {
       org_agenda_files = {'~/org/agenda/*.org'},
       org_default_notes_file = '~/org/agenda/todos.org',
+      win_split_mode = 'auto',
 		  org_indent_mode = "noindent",
 		  org_capture_templates = {
-			  t = { description = "Todo Item", template = "* TODO %?\n  %t\n  - "},
-			  p = { description = "Paste Todo Item", template = "* TODO %x%?\n  %t\n  - "},
+			  t = { description = "Todo Item", template = "* TODO %?\n%t\n  - "},
+			  -- p = { description = "Paste Todo Item", template = "* TODO %x%?\n  %t\n  - "},
 		  },
 		  mappings = {
 			  org = {
